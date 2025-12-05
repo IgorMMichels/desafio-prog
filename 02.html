@@ -1,0 +1,94 @@
+<meta charset="UTF-8" />
+<script>
+  let alunos = ["João", "Maria", "Pedro", "Ana", "Carlos"];
+  let notas = [];
+  let mediaNotas = [];
+  let desempenho = [];
+
+  function cadastraNota() {
+    let notaAluno;
+    let notasAlunoSeparado = [];
+
+    for (aluno of alunos) {
+      for (let i = 1; i <= 4; i++) {
+        notaAluno = Number(prompt(`Adicione a ${i}ª nota do ${aluno}.`));
+
+        while (
+          notaAluno == `` ||
+          isNaN(notaAluno) ||
+          notaAluno < 0 ||
+          notaAluno > 10
+        ) {
+          notaAluno = Number(prompt(`Adicione a ${i}ª nota do ${aluno}.`));
+        }
+
+        notasAlunoSeparado.push(notaAluno);
+      }
+      notas.push([notasAlunoSeparado]);
+    }
+  }
+
+  function calculaNota() {
+    let somaNota;
+    let mediaNota;
+
+    for (let i = 0; i < alunos.length; i++) {
+      for (nota of (notas[i]).length) {
+        somaNota += nota;
+      }
+      mediaNota = somaNota / 4;
+
+      mediasNotas.push(mediaNota);
+
+      if (mediaNota < 5) {
+        desempenho.push(`Insuficiente`);
+      } else if (mediaNota < 7) {
+        desempenho.push(`Regular`);
+      } else if (mediaNota < 9) {
+        desempenho.push(`Bom`);
+      } else if (mediaNota <= 10) {
+        desempenho.push(`Excelente`);
+      }
+    }
+  }
+
+  function geraRelatorio() {
+    let relatorio = "=== DESEMPENHO DOS ALUNOS ===\n";
+
+    for (let i = 0; i < alunos.length; i++) {
+      relatorio += `Aluno: ${alunos[i]} - Notas: ${notas[i].join(
+        ", "
+      )} - Média: ${mediaNotas[i]} - Desempenho: ${desempenho}. \n`;
+    }
+
+    return relatorio;
+  }
+
+  cadastraNota();
+
+  let opcao = 1;
+  while (opcao > 0) {
+    opcao = parseInt(
+      prompt(
+        "=== GERENCIADOR DE NOTAS ===\n" +
+          "1. Vizualizar Relatórios\n" +
+          "2. Remover Aluno\n" +
+          "0. Sair\n\n" +
+          "Escolha uma opção:"
+      )
+    );
+    switch (opcao) {
+      case 1:
+        alert(geraRelatorio());
+        break;
+      case 2:
+        alert(geraRelatorio());
+        break;
+      case 0:
+        alert("Saindo...");
+        break;
+      default:
+        alert("Opção inválida!");
+    }
+  }
+</script>
