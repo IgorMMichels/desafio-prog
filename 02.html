@@ -6,11 +6,10 @@
   let desempenho = [];
 
   function cadastraNota() {
-    let notaAluno;
-    let notasAlunoSeparado = [];
-
     for (aluno of alunos) {
+      let notasAlunoSeparado = [];
       for (let i = 1; i <= 4; i++) {
+        let notaAluno;
         notaAluno = Number(prompt(`Adicione a ${i}ª nota do ${aluno}.`));
 
         while (
@@ -24,21 +23,20 @@
 
         notasAlunoSeparado.push(notaAluno);
       }
-      notas.push([notasAlunoSeparado]);
+      notas.push(notasAlunoSeparado);
     }
   }
 
   function calculaNota() {
-    let somaNota;
-    let mediaNota;
-
     for (let i = 0; i < alunos.length; i++) {
-      for (nota of (notas[i]).length) {
+      let somaNota = 0;
+      let mediaNota;
+      for (nota of notas[i]) {
         somaNota += nota;
       }
       mediaNota = somaNota / 4;
 
-      mediasNotas.push(mediaNota);
+      mediaNotas.push(mediaNota);
 
       if (mediaNota < 5) {
         desempenho.push(`Insuficiente`);
@@ -52,19 +50,34 @@
     }
   }
 
+  function removeAluno() {
+    let alunoR = prompt(`Informe o nome do aluno, opcões: ${alunos.join(", ")}`).toLowerCase().trim();
+    alunoR = alunoR[0].toUpperCase() + alunoR.slice(1)
+    while (alunos.indexOf(alunoR) == -1) {
+      alunoR = prompt(`Informe o nome do aluno, opcões: ${alunos.join(", ")}`).toLowerCase().trim();
+      alunoR[0].toUpperCase() + alunoR.slice(1)
+    }
+    let remove = alunos.indexOf(alunoR)
+    notas.splice(remove, 1)
+    desempenho.splice(remove, 1)
+    mediaNotas.splice(remove, 1)
+    alunos.splice(remove, 1)
+    console.log(alunos)
+    return `${alunoR} foi removido(a) da lista de alunos.`
+  }
+
   function geraRelatorio() {
     let relatorio = "=== DESEMPENHO DOS ALUNOS ===\n";
 
     for (let i = 0; i < alunos.length; i++) {
-      relatorio += `Aluno: ${alunos[i]} - Notas: ${notas[i].join(
-        ", "
-      )} - Média: ${mediaNotas[i]} - Desempenho: ${desempenho}. \n`;
+      relatorio += `Aluno: ${alunos[i]} - Notas: ${notas[i].join(", ")} - Média: ${mediaNotas[i]} - Desempenho: ${desempenho[i]}. \n`;
     }
 
     return relatorio;
   }
 
   cadastraNota();
+  calculaNota();
 
   let opcao = 1;
   while (opcao > 0) {
@@ -80,9 +93,9 @@
     switch (opcao) {
       case 1:
         alert(geraRelatorio());
-        break;
+        break;  
       case 2:
-        alert(geraRelatorio());
+        alert(removeAluno());
         break;
       case 0:
         alert("Saindo...");
