@@ -53,16 +53,16 @@
   function removeAluno() {
     let alunoR = prompt(`Informe o nome do aluno, opcões: ${alunos.join(", ")}`).toLowerCase().trim();
     alunoR = alunoR[0].toUpperCase() + alunoR.slice(1)
-    while (alunos.indexOf(alunoR) == -1) {
-      alunoR = prompt(`Informe o nome do aluno, opcões: ${alunos.join(", ")}`).toLowerCase().trim();
-      alunoR[0].toUpperCase() + alunoR.slice(1)
+    while (alunos.indexOf(alunoR) === -1 || alunoR.length === 0) {
+      alunoR = prompt(`** Informe o nome do aluno, opcões: ${alunos.join(", ")}`).toLowerCase().trim();
+      alunoR = alunoR[0].toUpperCase() + alunoR.slice(1)
     }
     let remove = alunos.indexOf(alunoR)
     notas.splice(remove, 1)
     desempenho.splice(remove, 1)
     mediaNotas.splice(remove, 1)
     alunos.splice(remove, 1)
-    console.log(alunos)
+
     return `${alunoR} foi removido(a) da lista de alunos.`
   }
 
