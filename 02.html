@@ -14,7 +14,7 @@
 
         while (
           notaAluno == `` ||
-          notaAluno == null || 
+          notaAluno == null ||
           isNaN(notaAluno) ||
           notaAluno < 0 ||
           notaAluno > 10
@@ -52,32 +52,50 @@
   }
 
   function removeAluno() {
-    let alunoR = prompt(`Informe o nome do aluno, opcões: \n${alunos.join("\n")}`).toLowerCase().trim();
+    let alunoR = prompt(
+      `Informe o nome do aluno, opcões: \n${alunos.join("\n")}`
+    )
+      .toLowerCase()
+      .trim();
 
     while (alunoR == "") {
-      let alunoR = prompt(`Informe o nome do aluno, opcões: \n${alunos.join("\n")}`).toLowerCase().trim();
+      let alunoR = prompt(
+        `Informe o nome do aluno, opcões: \n${alunos.join("\n")}`
+      )
+        .toLowerCase()
+        .trim();
     }
 
-    alunoR = alunoR[0].toUpperCase() + alunoR.slice(1)
-    while (alunos.indexOf(alunoR) === -1 || alunoR.length === 0 || alunoR == "") {
-      prompt(`${alunoR} não foi encontrado(a).`)
-      alunoR = prompt(`** Informe o nome do aluno, opcões: \n${alunos.join("\n")}`).toLowerCase().trim();
-      alunoR = alunoR[0].toUpperCase() + alunoR.slice(1)
+    alunoR = alunoR[0].toUpperCase() + alunoR.slice(1);
+    while (
+      alunos.indexOf(alunoR) === -1 ||
+      alunoR.length === 0 ||
+      alunoR == ""
+    ) {
+      prompt(`${alunoR} não foi encontrado(a).`);
+      alunoR = prompt(
+        `** Informe o nome do aluno, opcões: \n${alunos.join("\n")}`
+      )
+        .toLowerCase()
+        .trim();
+      alunoR = alunoR[0].toUpperCase() + alunoR.slice(1);
     }
-    let remove = alunos.indexOf(alunoR)
-    notas.splice(remove, 1)
-    desempenho.splice(remove, 1)
-    mediaNotas.splice(remove, 1)
-    alunos.splice(remove, 1)
+    let remove = alunos.indexOf(alunoR);
+    notas.splice(remove, 1);
+    desempenho.splice(remove, 1);
+    mediaNotas.splice(remove, 1);
+    alunos.splice(remove, 1);
 
-    return `${alunoR} foi removido(a) da lista de alunos.`
+    return `${alunoR} foi removido(a) da lista de alunos.`;
   }
 
   function geraRelatorio() {
     let relatorio = "=== DESEMPENHO DOS ALUNOS ===\n";
 
     for (let i = 0; i < alunos.length; i++) {
-      relatorio += `Aluno: ${alunos[i]} - Notas: ${notas[i].join(", ")} - Média: ${mediaNotas[i]} - Desempenho: ${desempenho[i]}. \n`;
+      relatorio += `Aluno: ${alunos[i]} - Notas: ${notas[i].join(
+        ", "
+      )} - Média: ${mediaNotas[i]} - Desempenho: ${desempenho[i]}. \n`;
     }
 
     return relatorio;
@@ -100,7 +118,7 @@
     switch (opcao) {
       case 1:
         alert(geraRelatorio());
-        break;  
+        break;
       case 2:
         alert(removeAluno());
         break;
