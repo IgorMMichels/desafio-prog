@@ -25,7 +25,8 @@
         notasAlunoSeparado.push(notaAluno);
       }
       notas.push(notasAlunoSeparado);
-    }
+  }
+    return `Todas as notas foram cadastradas com sucesso!`
   }
 
   function calculaNota() {
@@ -101,7 +102,7 @@
     return relatorio;
   }
 
-  cadastraNota();
+  alert(cadastraNota());
   calculaNota();
 
   let opcao = 1;
