@@ -10,15 +10,16 @@
       let notasAlunoSeparado = [];
       for (let i = 1; i <= 4; i++) {
         let notaAluno;
-        notaAluno = Number(prompt(`Adicione a ${i}ª nota do ${aluno}.`));
+        notaAluno = Number(prompt(`Adicione a ${i}ª nota do(a) ${aluno}.`));
 
         while (
           notaAluno == `` ||
+          notaAluno == null || 
           isNaN(notaAluno) ||
           notaAluno < 0 ||
           notaAluno > 10
         ) {
-          notaAluno = Number(prompt(`Adicione a ${i}ª nota do ${aluno}.`));
+          notaAluno = Number(prompt(`Adicione a ${i}ª nota do(a) ${aluno}.`));
         }
 
         notasAlunoSeparado.push(notaAluno);
@@ -51,10 +52,16 @@
   }
 
   function removeAluno() {
-    let alunoR = prompt(`Informe o nome do aluno, opcões: ${alunos.join(", ")}`).toLowerCase().trim();
+    let alunoR = prompt(`Informe o nome do aluno, opcões: \n${alunos.join("\n")}`).toLowerCase().trim();
+
+    while (alunoR == "") {
+      let alunoR = prompt(`Informe o nome do aluno, opcões: \n${alunos.join("\n")}`).toLowerCase().trim();
+    }
+
     alunoR = alunoR[0].toUpperCase() + alunoR.slice(1)
-    while (alunos.indexOf(alunoR) === -1 || alunoR.length === 0) {
-      alunoR = prompt(`** Informe o nome do aluno, opcões: ${alunos.join(", ")}`).toLowerCase().trim();
+    while (alunos.indexOf(alunoR) === -1 || alunoR.length === 0 || alunoR == "") {
+      prompt(`${alunoR} não foi encontrado(a).`)
+      alunoR = prompt(`** Informe o nome do aluno, opcões: \n${alunos.join("\n")}`).toLowerCase().trim();
       alunoR = alunoR[0].toUpperCase() + alunoR.slice(1)
     }
     let remove = alunos.indexOf(alunoR)
